@@ -1,1 +1,13 @@
 @import "tailwindcss";
+
+.commonColor {
+    background-color: #C2F800;
+}
+
+.commonTextColor {
+    color: #C2F800;
+}
+
+.rotated-image {
+  transform: rotate(-45deg);
+}
