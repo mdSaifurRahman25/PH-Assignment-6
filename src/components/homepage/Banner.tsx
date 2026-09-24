@@ -12,7 +12,7 @@ const Banner = () => {
               <div className='col-span-6'>
                 <p className='text-lime-400 tracking-widest font-bold uppercase pb-5'>Workout Library</p>
                 <h1 className='text-white font-bold text-4xl uppercase pb-5'>Train with intent. Log <br /> Every set. </h1>
-                <p className='text-white text-xl pb-18'>FitLog is a dark, no-nonsense gym companion: pick a lift, lock it <br /> into {"today's"} plan, and watch the {"week's"} work add up.</p>
+                <p className='text-white text-xl pb-10'>FitLog is a dark, no-nonsense gym companion: pick a lift, lock it <br /> into {"today's"} plan, and watch the {"week's"} work add up.</p>
                 <button className='bg-[#C2F800] px-8 py-4 rounded-xl uppercase font-bold text-xl'>
                   <Link href={'/workouts'}>Browse Workouts</Link>
                 </button>

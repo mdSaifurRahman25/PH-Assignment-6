@@ -13,7 +13,7 @@ const Navbar = () => {
          </Link>
         </div>
         <div className='flex gap-3'>
-          <Link href={'/workouts'}>Workouts</Link>
+          <Link href={'/'}>Workouts</Link>
           <Link href={'/myplan'}>My Plan</Link>
         </div>
         <div className='flex gap-4'>

@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Link from "next/link";
 import { CiStar } from "react-icons/ci";
 import { IoMdTime } from "react-icons/io";
 import { IoTimerSharp } from "react-icons/io5";
@@ -20,7 +21,8 @@ const WorkoutsCard = ({ workouts }) => {
                     } = workout;
 
                     return (
-                        <div
+                        <Link
+                            href={`/workouts/${id}`}
                             className="h-[400px] overflow-hidden rounded-3xl bg-zinc-900 border border-transparent"
                             key={id}
                         >
@@ -90,7 +92,7 @@ const WorkoutsCard = ({ workouts }) => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </Link>
                     )
                 })
             }

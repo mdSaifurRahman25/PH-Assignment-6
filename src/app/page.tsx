@@ -1,13 +1,15 @@
 import Banner from "@/components/homepage/Banner";
 import Footer from "@/components/homepage/Footer";
-import Workouts from "@/components/homepage/Workout";
+import Workout from "./workouts/page";
+
+
+
 
 export default function Home() {
   return (
     <div>
       <Banner />
-      <Workouts />
-      <Footer />
+      <Workout />
     </div>
   );
 }
