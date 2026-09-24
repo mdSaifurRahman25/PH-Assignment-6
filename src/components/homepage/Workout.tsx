@@ -1,12 +1,24 @@
-import React from 'react'
+import WorkoutsCard from "../shared/WorkoutsCard";
 
-const Workout = () => {
+const getWorkouts = async () => {
+    const res = await fetch('https://api.abcz.workers.dev/api/fitlog'); 
+    const data = await res.json(); 
+    return data; 
+}
+
+const Workout = async () => {
+
+    const workouts = await getWorkouts(); 
+    // console.log(workouts);
+
     return (
         <div className='bg-black text-white py-20'>
             <div className='container mx-auto'>
                 <h3 className='uppercase font-bold text-3xl'>The Library</h3>
                 <p>Twelve lifts covering every major muscle group.</p>
-                
+                <div>
+                    <WorkoutsCard workouts={workouts} />
+                </div>
             </div>
         </div>
     )
