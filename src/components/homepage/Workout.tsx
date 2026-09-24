@@ -12,7 +12,7 @@ const Workout = async () => {
     // console.log(workouts);
 
     return (
-        <div className='bg-black text-white py-20'>
+        <div className='bg-[#222630] text-white py-10'>
             <div className='container mx-auto'>
                 <h3 className='uppercase font-bold text-3xl'>The Library</h3>
                 <p>Twelve lifts covering every major muscle group.</p>
