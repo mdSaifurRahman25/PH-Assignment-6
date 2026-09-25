@@ -1,8 +1,62 @@
+import Link from 'next/link'
 import React from 'react'
 
 const MyPlan = () => {
   return (
-    <div>MyPlan</div>
+    <div className='commonColor'>
+      <div className='container mx-auto py-8'>
+        {/* Title Section */}
+        <div className='pb-6'>
+          <h1 className='text-white font-bold text-4xl pb-2'>My Plan</h1>
+          <p className='text-sm text-white'>Cap of five lifts for today. Finish them, then load more.</p>
+        </div>
+
+        {/* Dashboard */}
+        <div className='flex justify-between items-center text-white border border-gray-500 rounded-2xl px-5 py-10 bg-[#222630]'>
+          <div>
+            <p>Exercises</p>
+            <p className='font-bold text-4xl'>2</p>
+          </div>
+          <div>
+            <p>Minutes</p>
+            <p className='font-bold text-4xl'>23</p>
+          </div>
+          <div>
+            <p>Calories</p>
+            <p className='font-bold text-4xl'>190</p>
+          </div>
+        </div>
+
+        {/* Card Name Section */}
+        <div className='text-white flex justify-between pt-10 pb-10'>
+          {/* Right Side */}
+          <div className='flex gap-3 border border-gray-500 text-sm px-5 py-2 rounded-xl'>
+            <Link href={'/'}>{"Today's Plan"}</Link>
+            <Link href={'/'}>Saved</Link>
+          </div>
+
+          {/* Left Side */}
+          <div className='text-white'>
+            <label htmlFor="">Sort By</label>
+            <select className='text-white' name="" id="">
+              <option value="">Duration</option>
+              <option value="">Example 1</option>
+              <option value="">Example 2</option>
+            </select>
+          </div>
+        </div>
+
+        {/* Workout List Section */}
+          <div className="py-20 border border-gray-500 rounded-2xl flex flex-col justify-between items-center text-center text-white">
+            <p className='text-3xl font-bold'>Nothing Here Yet!</p>
+            <p className='pt-2 text-sm'>Browse the library and add a lift to get today moving.</p>
+            <button className='pt-10'>
+              <Link className='border border-lime-500 rounded-full px-5 py-3 bg-lime-500 ' href={'/workouts'}>Go to Workouts</Link>
+            </button>
+          </div>
+
+      </div>
+    </div>
   )
 }
 
