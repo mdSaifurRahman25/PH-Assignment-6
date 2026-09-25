@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import { IoIosSave } from "react-icons/io";
+import { TbCalendarDue } from "react-icons/tb";
 
 const WorkoutDetailsPage = async ({ params }) => {
     const { id } = await params;
@@ -23,7 +25,7 @@ const WorkoutDetailsPage = async ({ params }) => {
                 <div className="w-[1280px] flex px-5 py-10 ">
                     {/* Image Section */}
                     <div className="w-1/2">
-                        <Image src={workout.image} width={400} height={600} className="w-[550px] h-[450px] border rounded-2xl" loading="eager" alt={workout.name} />
+                        <Image src={workout.image} width={400} height={900} className="w-[550px] h-[700px] border rounded-2xl" loading="eager" alt={workout.name} />
                     </div>
 
                     {/* Text Section */}
@@ -83,12 +85,12 @@ const WorkoutDetailsPage = async ({ params }) => {
 
                         {/* instructions */}
                         <div>
-                            <p className="uppercase font-bold ">instructions</p>
-                            <ol>
+                            <p className="uppercase font-bold py-5">instructions</p>
+                            <ol className="text-sm ">
                                 {
                                     workout.instructions.map((instruction: string, index: number) => (
                                         <li className="flex" key={index}>
-                                            <p className="">{index + 1} .</p>
+                                            <p className="pr-2">{index + 1} .</p>
                                             <p>{instruction}</p>
                                         </li>
                                     ))
@@ -97,9 +99,14 @@ const WorkoutDetailsPage = async ({ params }) => {
                         </div>
 
                         {/* Button Section */}
-                        <div>
-                            <Link href={'/myplan'}>Add to {"Today's"} Plan</Link>
-                            <Link href={'/myplan'}>Saved for later</Link>
+                        <div className="pt-5 flex gap-5">
+                            <Link className="bg-lime-500 border rounded-2xl px-6 py-2 text-black flex items-center gap-2" href={'/myplan'}>
+                            <TbCalendarDue />
+                            <p>Add to {"Today's"} Plan</p>
+                            </Link>
+                            <Link className="bg-lime-500 border rounded-2xl px-6 py-2 text-black flex items-center gap-2" href={'/myplan'}>
+                            <IoIosSave />
+                            Saved for later</Link>
                         </div>
                     </div>
                 </div>
