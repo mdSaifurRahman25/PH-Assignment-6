@@ -32,7 +32,7 @@ const WorkoutDetailsPage = async ({ params }) => {
                         <p className="pb-3">{workout.description}</p>
 
                         {/* muscleGroups */}
-                        <div className="flex gap-4">
+                        <div className="flex gap-4 ">
                             {
                                 workout.muscleGroups.map((muscle: string[], index: number) => (
                                     <div className="px-4 py-1  text-black font-bold bg-lime-500 rounded-full" key={index}>
@@ -43,27 +43,56 @@ const WorkoutDetailsPage = async ({ params }) => {
                         </div>
 
                         {/* key notes */}
-                        <div>
-                            <p>EQUIPMENT {workout.equipment}</p>
-                            <p>DIFFICULTY{workout.difficulty}</p>
-                            <p>SETS{workout.sets}</p>
-                            <p>REPS{workout.reps}</p>
-                            <p>DURATION{workout.duration} min</p>
-                            <p>CALORIES{workout.caloriesBurned} kcal</p>
-                            <p>RATING{workout.rating}</p>
+                        <div className="pb-5 w-full bg-[#222630] border border-slate-800 rounded-2xl p-4 my-5 ">
+
+                            <div className="flex justify-between items-center py-3 border-b border-gray-400">
+                                <span className="text-slate-400 font-bold uppercase tracking-wider text-xs">EQUIPMENT</span>
+                                <span className="text-white font-medium">{workout.equipment}</span>
+                            </div>
+
+                            <div className="flex justify-between items-center py-3 border-b border-gray-400">
+                                <span className="text-slate-400 font-bold uppercase tracking-wider text-xs">DIFFICULTY</span>
+                                <span className="text-white font-medium">{workout.difficulty}</span>
+                            </div>
+
+                            <div className="flex justify-between items-center py-3 border-b border-gray-400">
+                                <span className="text-slate-400 font-bold uppercase tracking-wider text-xs">SETS</span>
+                                <span className="text-white font-medium">{workout.sets}</span>
+                            </div>
+
+                            <div className="flex justify-between items-center py-3 border-b border-gray-400">
+                                <span className="text-slate-400 font-bold uppercase tracking-wider text-xs">REPS</span>
+                                <span className="text-white font-medium">{workout.reps}</span>
+                            </div>
+
+                            <div className="flex justify-between items-center py-3 border-b border-gray-400">
+                                <span className="text-slate-400 font-bold uppercase tracking-wider text-xs">DURATION</span>
+                                <span className="text-white font-medium">{workout.duration} min</span>
+                            </div>
+
+                            <div className="flex justify-between items-center py-3 border-b border-gray-400">
+                                <span className="text-slate-400 font-bold uppercase tracking-wider text-xs">CALORIES</span>
+                                <span className="text-white font-medium">{workout.caloriesBurned} kcal</span>
+                            </div>
+
+                            <div className="flex justify-between items-center pt-3">
+                                <span className="text-slate-400 font-bold uppercase tracking-wider text-xs">RATING</span>
+                                <span className="text-white font-medium">{workout.rating}</span>
+                            </div>
                         </div>
 
                         {/* instructions */}
                         <div>
+                            <p className="uppercase font-bold ">instructions</p>
                             <ol>
                                 {
-                                workout.instructions.map((instruction: string, index: number) => (
-                                    <li key={index}>
-                                        {index + 1}
-                                        <p>{instruction}</p>
-                                    </li>
-                                ))
-                            }
+                                    workout.instructions.map((instruction: string, index: number) => (
+                                        <li className="flex" key={index}>
+                                            <p className="">{index + 1} .</p>
+                                            <p>{instruction}</p>
+                                        </li>
+                                    ))
+                                }
                             </ol>
                         </div>
 
