@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const WorkoutDetailsPage = async ({ params }) => {
     const { id } = await params;
@@ -17,24 +18,24 @@ const WorkoutDetailsPage = async ({ params }) => {
     // console.log(workout);
 
     return (
-        <div className="commonColor">
+        <div className="commonColor text-white">
             <div className="container mx-auto">
-                <div className="w-[950px] flex ">
+                <div className="w-[1280px] flex px-5 py-10 ">
                     {/* Image Section */}
                     <div className="w-1/2">
-                        <Image src={workout.image} width={400} height={800} className="w-full" loading="eager" alt={workout.name} />
+                        <Image src={workout.image} width={400} height={600} className="w-[550px] h-[450px] border rounded-2xl" loading="eager" alt={workout.name} />
                     </div>
 
                     {/* Text Section */}
                     <div className="w-1/2">
-                        <h1>{workout.name}</h1>
-                        <p>{workout.description}</p>
+                        <h1 className="font-bold text-5xl pb-3">{workout.name}</h1>
+                        <p className="pb-3">{workout.description}</p>
 
                         {/* muscleGroups */}
-                        <div>
+                        <div className="flex gap-4">
                             {
                                 workout.muscleGroups.map((muscle: string[], index: number) => (
-                                    <div key={index}>
+                                    <div className="px-4 py-1  text-black font-bold bg-lime-500 rounded-full" key={index}>
                                         <p>{muscle}</p>
                                     </div>
                                 ))
@@ -54,9 +55,22 @@ const WorkoutDetailsPage = async ({ params }) => {
 
                         {/* instructions */}
                         <div>
-                            {
-                                workout.instructions
+                            <ol>
+                                {
+                                workout.instructions.map((instruction: string, index: number) => (
+                                    <li key={index}>
+                                        {index + 1}
+                                        <p>{instruction}</p>
+                                    </li>
+                                ))
                             }
+                            </ol>
+                        </div>
+
+                        {/* Button Section */}
+                        <div>
+                            <Link href={'/myplan'}>Add to {"Today's"} Plan</Link>
+                            <Link href={'/myplan'}>Saved for later</Link>
                         </div>
                     </div>
                 </div>
