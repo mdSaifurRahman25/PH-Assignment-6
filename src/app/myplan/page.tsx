@@ -47,7 +47,7 @@ const MyPlan = () => {
         </div>
 
         {/* Workout List Section */}
-          <div className="py-20 border border-gray-500 rounded-2xl flex flex-col justify-between items-center text-center text-white">
+          <div className="py-20 border border-gray-500 rounded-2xl bg-gray-900/60 flex flex-col justify-between items-center text-center text-white">
             <p className='text-3xl font-bold'>Nothing Here Yet!</p>
             <p className='pt-2 text-sm'>Browse the library and add a lift to get today moving.</p>
             <button className='pt-10'>
