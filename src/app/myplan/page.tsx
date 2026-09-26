@@ -1,7 +1,9 @@
+import MyPlanDetails from '@/components/shared/MyPlanDetails'
 import Link from 'next/link'
 
 
 const MyPlan = () => {
+
   return (
     <div className='commonColor'>
       <div className='container mx-auto py-8'>
@@ -11,28 +13,15 @@ const MyPlan = () => {
           <p className='text-sm text-white'>Cap of five lifts for today. Finish them, then load more.</p>
         </div>
 
-        {/* Dashboard */}
-        <div className='flex justify-between items-center text-white border border-gray-500 rounded-2xl px-5 py-10 bg-[#222630]'>
-          <div>
-            <p>Exercises</p>
-            <p className='font-bold text-4xl'>2</p>
-          </div>
-          <div>
-            <p>Minutes</p>
-            <p className='font-bold text-4xl'>23</p>
-          </div>
-          <div>
-            <p>Calories</p>
-            <p className='font-bold text-4xl'>190</p>
-          </div>
-        </div>
+        {/* Dashboard Details */}
+        <MyPlanDetails />
 
         {/* Card Name Section */}
         <div className='text-white flex justify-between pt-10 pb-10'>
           {/* Right Side */}
           <div className='flex gap-3 border border-gray-500 text-sm px-5 py-2 rounded-xl'>
-            <Link href={'/'}>{"Today's Plan"}</Link>
-            <Link href={'/'}>Saved</Link>
+            <button>{"Today's Plan"}</button>
+            <button>Saved</button>
           </div>
 
           {/* Left Side */}
