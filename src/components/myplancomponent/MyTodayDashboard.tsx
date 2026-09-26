@@ -13,11 +13,9 @@ import { toast } from 'react-toastify';
 
 const MyTodayDashboard = ({ sortBy }: { sortBy: string }) => {
     const { planList, deletePlan } = useContext(WorkoutContext) as any;
-    // console.log(planList, savedList);
 
     const [mark, setMark] = useState<number[]>([]);
     const [disabledButtons, setDisabledButtons] = useState<number[]>([]);
-
 
     if (planList.length === 0) {
         return <MyPlanWorkoutDetails />
@@ -33,7 +31,6 @@ const MyTodayDashboard = ({ sortBy }: { sortBy: string }) => {
         deletePlan(id);
         toast.error('Item removed from your list.');
     };
-
 
     // sorting 
     const getSortedList = () => {
@@ -66,64 +63,78 @@ const MyTodayDashboard = ({ sortBy }: { sortBy: string }) => {
                 {sortedPlans.map((plan) => {
                     return (
                         <div
-                            className='flex justify-between items-center border border-gray-700 bg-gray-900 rounded-2xl px-3 py-4'
+                            className='flex flex-col md:flex-row md:justify-between md:items-center border border-gray-700 bg-gray-900 rounded-2xl p-4 gap-4'
                             key={plan.id}
                         >
-
                             {/* Left side of the card */}
-                            <div className='flex gap-4'>
-                                <div className='w-[120px] h-[80px] relative overflow-hidden rounded-xl'>
-                                    <Image src={plan.image} width={200} height={100} alt={plan.name} className='object-cover' />
+                            <div className='flex items-center gap-3 sm:gap-4'>
+                                <div className='w-[80px] h-[70px] sm:w-[120px] sm:h-[80px] relative overflow-hidden rounded-xl flex-shrink-0'>
+                                    <Image 
+                                        src={plan.image} 
+                                        alt={plan.name} 
+                                        fill
+                                        className='object-cover' 
+                                    />
                                 </div>
-                                <div>
-                                    <h4 className='font-bold text-2xl'>{plan.name}</h4>
-                                    <p>{plan.equipment}</p>
-                                    <div className="flex gap-4 text-slate-400">
+                                <div className='min-w-0 space-y-1'>
+                                    <h4 className='font-bold text-lg sm:text-2xl text-white truncate'>{plan.name}</h4>
+                                    <p className='text-xs sm:text-base text-gray-400 truncate'>{plan.equipment}</p>
+                                    
+                                    <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-xs sm:text-base text-slate-400 pt-1">
                                         {/* Duration */}
                                         <div className="flex items-center gap-1">
                                             <IoMdTime className='text-lime-500' />
-                                            <p>{plan.duration}</p>
-                                            <p>min</p>
+                                            <span>{plan.duration} min</span>
                                         </div>
 
                                         {/* Calories */}
                                         <div className="flex items-center gap-1">
                                             <IoTimerSharp className='text-lime-500' />
-                                            <p>{plan.caloriesBurned}</p>
-                                            <p>kcal</p>
+                                            <span>{plan.caloriesBurned} kcal</span>
                                         </div>
 
                                         {/* Rating */}
                                         <div className="flex items-center gap-1">
                                             <CiStar className='text-lime-500' />
-                                            <p>{plan.rating}</p>
+                                            <span>{plan.rating}</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                             {/* Right Side of the card */}
-                            <div className='flex gap-4 '>
-                                <Link className='border border-gray-600 px-5 py-2 rounded-3xl' href={`/workouts/${plan.id}`}>View Details</Link>
+                            <div className='flex items-center justify-between md:justify-end gap-2 sm:gap-4 w-full md:w-auto pt-2 md:pt-0 border-t md:border-t-0 border-gray-800 md:border-none'>
+                                <div className='flex items-center gap-2 sm:gap-4 flex-1 md:flex-initial'>
+                                    <Link 
+                                        className='flex-1 md:flex-initial text-center border border-gray-600 px-3 sm:px-5 py-2 rounded-3xl text-xs sm:text-base whitespace-nowrap hover:bg-gray-800 transition-colors' 
+                                        href={`/workouts/${plan.id}`}
+                                    >
+                                        View Details
+                                    </Link>
 
-                                <button
-                                    disabled={disabledButtons.includes(plan.id)}
-                                    onClick={() => handleMark(plan.id)}
-                                    className={`flex justify-between items-center gap-3 px-5 py-2 rounded-3xl ${disabledButtons.includes(plan.id)
-                                        ? 'bg-gray-600 text-gray-400 cursor-not-allowed'
-                                        : 'bg-lime-500 text-black cursor-pointer'
+                                    <button
+                                        disabled={disabledButtons.includes(plan.id)}
+                                        onClick={() => handleMark(plan.id)}
+                                        className={`flex-1 md:flex-initial flex justify-center items-center gap-2 px-3 sm:px-5 py-2 rounded-3xl text-xs sm:text-base whitespace-nowrap ${
+                                            disabledButtons.includes(plan.id)
+                                                ? 'bg-gray-600 text-gray-400 cursor-not-allowed'
+                                                : 'bg-lime-500 text-black cursor-pointer font-medium hover:bg-lime-400 transition-colors'
                                         }`}
-                                >
-                                    <FaCheck />
-                                    {disabledButtons.includes(plan.id) ? <p>Done</p> : <p>Mark as Done</p>}
-                                </button>
+                                    >
+                                        <FaCheck />
+                                        <span>{disabledButtons.includes(plan.id) ? 'Done' : 'Mark as Done'}</span>
+                                    </button>
+                                </div>
+
+                                {/* Close Button - Rightmost on Desktop & Mobile */}
                                 <button
                                     onClick={() => handleDelete(plan.id)}
-                                    className='flex justify-center items-center pr-3 cursor-pointer text-gray-400 hover:text-red-500 transition-colors'
+                                    className='flex justify-center items-center pl-2 sm:pr-3 cursor-pointer text-gray-400 hover:text-red-500 transition-colors flex-shrink-0'
                                 >
-                                    <IoMdClose className="text-xl" />
+                                    <IoMdClose className="text-xl sm:text-2xl" />
                                 </button>
                             </div>
+
                         </div>
                     )
                 })}
@@ -132,4 +143,4 @@ const MyTodayDashboard = ({ sortBy }: { sortBy: string }) => {
     )
 }
 
-export default MyTodayDashboard
+export default MyTodayDashboard;
