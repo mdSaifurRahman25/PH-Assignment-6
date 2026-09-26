@@ -1,10 +1,10 @@
 'use client'
-import MyPlanDashboard from '@/components/myplancomponent/MyTodayDashboard'
-import MyPlanDetails from '@/components/myplancomponent/MyPlanDetails'
-import ToggleButton from '@/components/myplancomponent/ToggleButton'
+
+import MyTodayPlanDetails from '@/components/myplancomponent/MyTodayPlanDetails'
 import { useState } from 'react'
 import MyTodayDashboard from '@/components/myplancomponent/MyTodayDashboard'
 import MySavedDashboard from '@/components/myplancomponent/MySavedDashboard'
+import MySavedPlanDetails from '@/components/myplancomponent/MySavedPlanDetails'
 
 
 
@@ -23,8 +23,7 @@ const MyPlan = () => {
         </div>
 
         {/* Dashboard Details */}
-        <MyPlanDetails />
-
+         {activeTab === 'today' ? <MyTodayPlanDetails /> : <MySavedPlanDetails /> }
 
         {/* Card Name Section */}
         <div className='text-white flex justify-between pt-10 pb-10'>

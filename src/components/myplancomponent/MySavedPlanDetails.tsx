@@ -1,0 +1,38 @@
+
+'use client'
+import { WorkoutContext } from '@/context/Workoutprovider';
+import { useContext } from 'react';
+
+const MySavedPlanDetails = () => {
+    const { savedList } = useContext(WorkoutContext) as any;
+    // console.log(savedList);
+
+    const totalDuration = savedList?.reduce((acc: number, curr: any) => {
+        return acc + Number(curr.duration);
+    }, 0);
+
+    const totalCaloriesBurned = savedList?.reduce((acc: number, curr: any) => {
+        return acc + Number(curr.caloriesBurned);
+    }, 0);
+
+    
+
+    return (
+        <div className='flex justify-between items-center text-white border border-gray-500 rounded-2xl px-5 py-10 bg-[#222630]'>
+            <div>
+                <p>Exercises</p>
+                <p className='font-bold text-4xl'>{savedList?.length}</p>
+            </div>
+            <div>
+                <p>Minutes</p>
+                <p className='font-bold text-4xl'>{totalDuration}</p>
+            </div>
+            <div>
+                <p>Calories</p>
+                <p className='font-bold text-4xl'>{totalCaloriesBurned}</p>
+            </div>
+        </div>
+    )
+}
+
+export default MySavedPlanDetails
