@@ -1,12 +1,14 @@
 import SingleWorkoutPageButton from "@/components/shared/SingleWorkoutPageButton";
 import Image from "next/image";
 
+interface PageProps {
+    params: Promise<{ id: string }>;
+}
 
-const WorkoutDetailsPage = async ({ params }) => {
+const WorkoutDetailsPage = async ({ params }: PageProps) => {
     const { id } = await params;
-    // console.log(id);
 
-    const res = await fetch(`https://api.abcz.workers.dev/api/fitlog/${id}`);
+    const res = await fetch(`https://api.api-store.workers.dev/api/fitlog/${id}`);
     if (!res.ok) {
         return (
             <div className="flex justify-center items-center h-screen text-red-500">
@@ -16,7 +18,6 @@ const WorkoutDetailsPage = async ({ params }) => {
     }
 
     const workout = await res.json();
-    // console.log(workout);
 
     return (
         <div className="commonColor text-white">
@@ -35,7 +36,7 @@ const WorkoutDetailsPage = async ({ params }) => {
                         {/* muscleGroups */}
                         <div className="flex gap-4 ">
                             {
-                                workout.muscleGroups.map((muscle: string[], index: number) => (
+                                workout.muscleGroups.map((muscle: string, index: number) => (
                                     <div className="px-4 py-1  text-black font-bold bg-lime-500 rounded-full" key={index}>
                                         <p>{muscle}</p>
                                     </div>
@@ -106,4 +107,4 @@ const WorkoutDetailsPage = async ({ params }) => {
     )
 }
 
-export default WorkoutDetailsPage
+export default WorkoutDetailsPage;

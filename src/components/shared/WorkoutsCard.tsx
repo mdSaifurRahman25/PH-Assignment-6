@@ -1,15 +1,30 @@
-import Image from "next/image"
+import Image from "next/image";
 import Link from "next/link";
 import { CiStar } from "react-icons/ci";
 import { IoMdTime } from "react-icons/io";
 import { IoTimerSharp } from "react-icons/io5";
 
+// Workout 
+interface Workout {
+    id: string | number;
+    name: string;
+    image: string;
+    muscleGroups: string[];
+    equipment: string;
+    duration: number;
+    caloriesBurned: number;
+    rating: number;
+}
 
-const WorkoutsCard = ({ workouts }) => {
+interface WorkoutsCardProps {
+    workouts: Workout[];
+}
+
+const WorkoutsCard = ({ workouts }: WorkoutsCardProps) => {
     return (
         <div className="grid grid-cols-3 gap-8 py-10">
             {
-                workouts.map((workout) => {
+                workouts.map((workout: Workout) => {
                     const {
                         id,
                         name,
@@ -101,4 +116,4 @@ const WorkoutsCard = ({ workouts }) => {
     )
 }
 
-export default WorkoutsCard
+export default WorkoutsCard;
