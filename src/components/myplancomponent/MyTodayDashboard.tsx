@@ -11,7 +11,7 @@ import Link from 'next/link';
 import { FaCheck } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 
-const MyTodayDashboard = () => {
+const MyTodayDashboard = ({ sortBy }: { sortBy: string }) => {
     const { planList, deletePlan } = useContext(WorkoutContext) as any;
     // console.log(planList, savedList);
 
@@ -34,11 +34,36 @@ const MyTodayDashboard = () => {
         toast.error('Item removed from your list.');
     };
 
+
+    // sorting 
+    const getSortedList = () => {
+        if (!planList) return [];
+
+        const currentSort = sortBy?.toLowerCase();
+
+        return [...planList].sort((a: any, b: any) => {
+            if (currentSort === 'duration') {
+                return (Number(b.duration) || 0) - (Number(a.duration) || 0);
+            }
+            if (currentSort === 'calories' || currentSort === 'caloriesburned') {
+                const calA = Number(a.caloriesBurned ?? a.calories) || 0;
+                const calB = Number(b.caloriesBurned ?? b.calories) || 0;
+                return calB - calA;
+            }
+            if (currentSort === 'rating') {
+                return (Number(b.rating) || 0) - (Number(a.rating) || 0);
+            }
+            return 0;
+        });
+    }
+
+    const sortedPlans = getSortedList();
+
     return (
         <div>
             {/* Details */}
             <div className='text-white space-y-3'>
-                {planList.map((plan) => {
+                {sortedPlans.map((plan) => {
                     return (
                         <div
                             className='flex justify-between items-center border border-gray-700 bg-gray-900 rounded-2xl px-3 py-4'
@@ -92,7 +117,7 @@ const MyTodayDashboard = () => {
                                     <FaCheck />
                                     {disabledButtons.includes(plan.id) ? <p>Done</p> : <p>Mark as Done</p>}
                                 </button>
-                                <button 
+                                <button
                                     onClick={() => handleDelete(plan.id)}
                                     className='flex justify-center items-center pr-3 cursor-pointer text-gray-400 hover:text-red-500 transition-colors'
                                 >

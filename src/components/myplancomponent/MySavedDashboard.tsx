@@ -11,15 +11,13 @@ import Link from 'next/link';
 import { FaCheck } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 
-const MySavedDashboard = () => {
+const MySavedDashboard = ({ sortBy }: { sortBy: string }) => {
     const { savedList, deleteSaved } = useContext(WorkoutContext) as any;
-    // console.log(savedList, deletePlan);
 
     const [mark, setMark] = useState<number[]>([]);
     const [disabledButtons, setDisabledButtons] = useState<number[]>([]);
 
-
-    if (savedList.length === 0) {
+    if (!savedList || savedList.length === 0) {
         return <MyPlanWorkoutDetails />
     }
 
@@ -34,17 +32,40 @@ const MySavedDashboard = () => {
         toast.error('Item removed from your list.');
     };
 
+    // Sorting Logic
+    const getSortedList = () => {
+        if (!savedList) return [];
+
+        const currentSort = sortBy?.toLowerCase();
+
+        return [...savedList].sort((a: any, b: any) => {
+            if (currentSort === 'duration') {
+                return (Number(b.duration) || 0) - (Number(a.duration) || 0);
+            }
+            if (currentSort === 'calories' || currentSort === 'caloriesburned') {
+                const calA = Number(a.caloriesBurned ?? a.calories) || 0;
+                const calB = Number(b.caloriesBurned ?? b.calories) || 0;
+                return calB - calA;
+            }
+            if (currentSort === 'rating') {
+                return (Number(b.rating) || 0) - (Number(a.rating) || 0);
+            }
+            return 0;
+        });
+    }
+
+    const sortedPlans = getSortedList();
+
     return (
         <div>
             {/* Details */}
             <div className='text-white space-y-3'>
-                {savedList.map((saved) => {
+                {sortedPlans.map((saved: any) => {
                     return (
                         <div
                             className='flex justify-between items-center border border-gray-700 bg-gray-900 rounded-2xl px-3 py-4'
                             key={saved.id}
                         >
-
                             {/* Left side of the card */}
                             <div className='flex gap-4'>
                                 <div className='w-[120px] h-[80px] relative overflow-hidden rounded-xl'>
@@ -78,25 +99,24 @@ const MySavedDashboard = () => {
                             </div>
 
                             {/* Right Side of the card */}
-
-                            {/* View Details */}
                             <div className='flex gap-4 '>
-                                <Link className='border border-gray-600 px-5 py-2 rounded-3xl' href={`/workouts/${saved.id}`}>View Details</Link>
+                                <Link className='border border-gray-600 px-5 py-2 rounded-3xl' href={`/workouts/${saved.id}`}>
+                                    View Details
+                                </Link>
 
-                                {/* Mark as Done */}
                                 <button
                                     disabled={disabledButtons.includes(saved.id)}
                                     onClick={() => handleMark(saved.id)}
-                                    className={`flex justify-between items-center gap-3 px-5 py-2 rounded-3xl ${disabledButtons.includes(saved.id)
-                                        ? 'bg-gray-600 text-gray-400 cursor-not-allowed'
-                                        : 'bg-lime-500 text-black cursor-pointer'
-                                        }`}
+                                    className={`flex justify-between items-center gap-3 px-5 py-2 rounded-3xl ${
+                                        disabledButtons.includes(saved.id)
+                                            ? 'bg-gray-600 text-gray-400 cursor-not-allowed'
+                                            : 'bg-lime-500 text-black cursor-pointer'
+                                    }`}
                                 >
                                     <FaCheck />
                                     {disabledButtons.includes(saved.id) ? <p>Done</p> : <p>Mark as Done</p>}
                                 </button>
 
-                                {/* Delete Button */}
                                 <button 
                                     onClick={() => handleDelete(saved.id)}
                                     className='flex justify-center items-center pr-3 cursor-pointer text-gray-400 hover:text-red-500 transition-colors'
@@ -112,4 +132,4 @@ const MySavedDashboard = () => {
     )
 }
 
-export default MySavedDashboard
+export default MySavedDashboard;

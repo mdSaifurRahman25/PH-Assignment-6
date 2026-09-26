@@ -4,6 +4,7 @@ import { CiStar } from "react-icons/ci";
 import { IoMdTime } from "react-icons/io";
 import { IoTimerSharp } from "react-icons/io5";
 
+
 const WorkoutsCard = ({ workouts }) => {
     return (
         <div className="grid grid-cols-3 gap-8 py-10">

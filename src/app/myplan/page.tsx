@@ -13,6 +13,9 @@ const MyPlan = () => {
 
   const [activeTab, setActiveTab] = useState<'today' | 'saved'>('today');
 
+  const [sortBy, setSortBy] = useState<string>('duration'); 
+
+
   return (
     <div className='commonColor'>
       <div className='container mx-auto py-8'>
@@ -23,19 +26,18 @@ const MyPlan = () => {
         </div>
 
         {/* Dashboard Details */}
-         {activeTab === 'today' ? <MyTodayPlanDetails /> : <MySavedPlanDetails /> }
+        {activeTab === 'today' ? <MyTodayPlanDetails /> : <MySavedPlanDetails />}
 
         {/* Card Name Section */}
         <div className='text-white flex justify-between pt-10 pb-10'>
           {/* Right Side */}
-          {/* <ToggleButton /> */}
           <div className="inline-flex items-center gap-1 border border-gray-700 bg-[#161a23] p-1 rounded-full">
             {/* Today's Plan Button */}
             <button
               onClick={() => setActiveTab('today')}
               className={`px-4 py-1.5 text-xs font-medium rounded-full transition-all duration-200 ${activeTab === 'today'
-                  ? 'bg-lime-400 text-black font-semibold'
-                  : 'text-gray-300 hover:text-white'
+                ? 'bg-lime-400 text-black font-semibold'
+                : 'text-gray-300 hover:text-white'
                 }`}
             >
               Today s Plan
@@ -45,27 +47,32 @@ const MyPlan = () => {
             <button
               onClick={() => setActiveTab('saved')}
               className={`px-4 py-1.5 text-xs font-medium rounded-full transition-all duration-200 ${activeTab === 'saved'
-                  ? 'bg-lime-400 text-black font-semibold'
-                  : 'text-gray-300 hover:text-white'
+                ? 'bg-lime-400 text-black font-semibold'
+                : 'text-gray-300 hover:text-white'
                 }`}
             >
               Saved
             </button>
           </div>
 
-          {/* Left Side */}
+          {/* Sorting Left Side */}
           <div className='text-white'>
-            <label htmlFor="">Sort By</label>
-            <select className='text-white' name="" id="">
-              <option value="">Duration</option>
-              <option value="">Example 1</option>
-              <option value="">Example 2</option>
+            <label htmlFor="sort" className="mr-2">Sort By</label>
+            <select 
+            id='sort'
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+            className='text-white bg-gray-800 p-2 rounded-md border border-gray-700'>
+              <option value="duration">Duration</option>
+              <option value="calories">Calories</option>
+              <option value="rating">Rating</option>
             </select>
           </div>
+
         </div>
 
         {/* Workout List Section */}
-        {activeTab === 'today' ? <MyTodayDashboard /> : <MySavedDashboard /> }
+        {activeTab === 'today' ? <MyTodayDashboard sortBy={sortBy} /> : <MySavedDashboard sortBy={sortBy} />}
 
       </div>
     </div>
