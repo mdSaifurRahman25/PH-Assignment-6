@@ -1,8 +1,17 @@
-import MyPlanDetails from '@/components/shared/MyPlanDetails'
-import Link from 'next/link'
+'use client'
+import MyPlanDashboard from '@/components/myplancomponent/MyTodayDashboard'
+import MyPlanDetails from '@/components/myplancomponent/MyPlanDetails'
+import ToggleButton from '@/components/myplancomponent/ToggleButton'
+import { useState } from 'react'
+import MyTodayDashboard from '@/components/myplancomponent/MyTodayDashboard'
+import MySavedDashboard from '@/components/myplancomponent/MySavedDashboard'
+
+
 
 
 const MyPlan = () => {
+
+  const [activeTab, setActiveTab] = useState<'today' | 'saved'>('today');
 
   return (
     <div className='commonColor'>
@@ -16,12 +25,33 @@ const MyPlan = () => {
         {/* Dashboard Details */}
         <MyPlanDetails />
 
+
         {/* Card Name Section */}
         <div className='text-white flex justify-between pt-10 pb-10'>
           {/* Right Side */}
-          <div className='flex gap-3 border border-gray-500 text-sm px-5 py-2 rounded-xl'>
-            <button>{"Today's Plan"}</button>
-            <button>Saved</button>
+          {/* <ToggleButton /> */}
+          <div className="inline-flex items-center gap-1 border border-gray-700 bg-[#161a23] p-1 rounded-full">
+            {/* Today's Plan Button */}
+            <button
+              onClick={() => setActiveTab('today')}
+              className={`px-4 py-1.5 text-xs font-medium rounded-full transition-all duration-200 ${activeTab === 'today'
+                  ? 'bg-lime-400 text-black font-semibold'
+                  : 'text-gray-300 hover:text-white'
+                }`}
+            >
+              Today s Plan
+            </button>
+
+            {/* Saved Button */}
+            <button
+              onClick={() => setActiveTab('saved')}
+              className={`px-4 py-1.5 text-xs font-medium rounded-full transition-all duration-200 ${activeTab === 'saved'
+                  ? 'bg-lime-400 text-black font-semibold'
+                  : 'text-gray-300 hover:text-white'
+                }`}
+            >
+              Saved
+            </button>
           </div>
 
           {/* Left Side */}
@@ -36,13 +66,7 @@ const MyPlan = () => {
         </div>
 
         {/* Workout List Section */}
-          <div className="py-20 border border-gray-500 rounded-2xl bg-gray-900/60 flex flex-col justify-between items-center text-center text-white">
-            <p className='text-3xl font-bold'>Nothing Here Yet!</p>
-            <p className='pt-2 text-sm'>Browse the library and add a lift to get today moving.</p>
-            <button className='pt-10'>
-              <Link className='border border-lime-500 rounded-full px-5 py-3 bg-lime-500 ' href={'/workouts'}>Go to Workouts</Link>
-            </button>
-          </div>
+        {activeTab === 'today' ? <MyTodayDashboard /> : <MySavedDashboard /> }
 
       </div>
     </div>

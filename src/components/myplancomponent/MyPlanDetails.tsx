@@ -14,6 +14,8 @@ const MyPlanDetails = () => {
         return acc + Number(curr.caloriesBurned);
     }, 0);
 
+    
+
     return (
         <div className='flex justify-between items-center text-white border border-gray-500 rounded-2xl px-5 py-10 bg-[#222630]'>
             <div>

@@ -1,9 +1,11 @@
+// 'use client'
 import Image from 'next/image'
 import IMAGE from '@/assets/logo.png'
 import Link from 'next/link'
 import PlanCounters from './PlanCounters' 
 
 const Navbar = () => {
+  // console.log(window.location.hash);
   return (
     <div className='commonColor text-white py-4 border-b-2 border-[#15171D]'>
       <nav className='flex justify-between items-center container mx-auto'>
