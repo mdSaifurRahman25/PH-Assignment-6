@@ -1,7 +1,6 @@
+import SingleWorkoutPageButton from "@/components/shared/SingleWorkoutPageButton";
 import Image from "next/image";
-import Link from "next/link";
-import { IoIosSave } from "react-icons/io";
-import { TbCalendarDue } from "react-icons/tb";
+
 
 const WorkoutDetailsPage = async ({ params }) => {
     const { id } = await params;
@@ -98,16 +97,8 @@ const WorkoutDetailsPage = async ({ params }) => {
                             </ol>
                         </div>
 
-                        {/* Button Section */}
-                        <div className="pt-5 flex gap-5">
-                            <Link className="bg-lime-500 border rounded-2xl px-6 py-2 text-black flex items-center gap-2" href={'/myplan'}>
-                            <TbCalendarDue />
-                            <p>Add to {"Today's"} Plan</p>
-                            </Link>
-                            <Link className="bg-lime-500 border rounded-2xl px-6 py-2 text-black flex items-center gap-2" href={'/myplan'}>
-                            <IoIosSave />
-                            Saved for later</Link>
-                        </div>
+                        {/* Button */}
+                        <SingleWorkoutPageButton workout={workout} />
                     </div>
                 </div>
             </div>
