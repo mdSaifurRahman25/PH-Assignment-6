@@ -1,4 +1,5 @@
 import WorkoutsCard from "@/components/shared/WorkoutsCard";
+import { Suspense } from "react";
 
 const getWorkouts = async () => {
     const res = await fetch('https://api.api-store.workers.dev/api/fitlog'); 
@@ -17,7 +18,9 @@ const Workout = async () => {
                 <h3 className='uppercase font-bold text-3xl'>The Library</h3>
                 <p>Twelve lifts covering every major muscle group.</p>
                 <div>
-                    <WorkoutsCard workouts={workouts} />
+                    <Suspense fallback={<p>Loading....</p>}>
+                        <WorkoutsCard workouts={workouts} />
+                    </Suspense>
                 </div>
             </div>
         </div>
