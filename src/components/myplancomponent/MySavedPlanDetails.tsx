@@ -1,17 +1,18 @@
 
 'use client'
 import { WorkoutContext } from '@/context/Workoutprovider';
+import { Workout } from '@/types/workout.types';
 import { useContext } from 'react';
 
 const MySavedPlanDetails = () => {
-    const { savedList } = useContext(WorkoutContext) as any;
+    const { savedList } = useContext(WorkoutContext);
     // console.log(savedList);
 
-    const totalDuration = savedList?.reduce((acc: number, curr: any) => {
+    const totalDuration = savedList?.reduce((acc: number, curr: Workout) => {
         return acc + Number(curr.duration);
     }, 0);
 
-    const totalCaloriesBurned = savedList?.reduce((acc: number, curr: any) => {
+    const totalCaloriesBurned = savedList?.reduce((acc: number, curr: Workout) => {
         return acc + Number(curr.caloriesBurned);
     }, 0);
 

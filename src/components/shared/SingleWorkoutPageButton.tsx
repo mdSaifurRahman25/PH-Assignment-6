@@ -1,25 +1,17 @@
 'use client'
 
 import { WorkoutContext } from '@/context/Workoutprovider';
-import { Dispatch, SetStateAction, useContext, useState } from 'react';
+import { Workout } from '@/types/workout.types';
+import { useContext, useState } from 'react';
 import { IoIosSave } from 'react-icons/io';
 import { TbCalendarDue } from 'react-icons/tb';
 import { toast } from 'react-toastify';
 
 
-interface WorkoutContextType {
-    plan: number;
-    setPlan: Dispatch<SetStateAction<number>>;
-    saved: number;
-    setSaved: Dispatch<SetStateAction<number>>;
-    planList: any[];
-    setPlanList: Dispatch<SetStateAction<any[]>>;
-    savedList: any[];
-    setSavedList: Dispatch<SetStateAction<any[]>>;
-}
+
 
 interface SingleWorkoutPageButtonProps {
-    workout: any;
+    workout: Workout;
 }
 
 const SingleWorkoutPageButton = ({ workout }: SingleWorkoutPageButtonProps) => {
@@ -29,7 +21,7 @@ const SingleWorkoutPageButton = ({ workout }: SingleWorkoutPageButtonProps) => {
         setSaved, 
         setPlanList, 
         setSavedList 
-    } = useContext(WorkoutContext) as WorkoutContextType;
+    } = useContext(WorkoutContext);
 
     const [isPlanned, setIsPlanned] = useState<boolean>(false);
     const [isSaved, setIsSaved] = useState<boolean>(false); 

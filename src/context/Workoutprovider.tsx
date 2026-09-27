@@ -1,5 +1,6 @@
 'use client'
 
+import { Workout } from '@/types/workout.types';
 import { createContext, Dispatch, ReactNode, SetStateAction, useState } from 'react';
 
 interface WorkoutContextType {
@@ -7,23 +8,34 @@ interface WorkoutContextType {
   setPlan: Dispatch<SetStateAction<number>>;
   saved: number;
   setSaved: Dispatch<SetStateAction<number>>;
-  planList: any[];
-  setPlanList: Dispatch<SetStateAction<any[]>>;
-  savedList: any[];
-  setSavedList: Dispatch<SetStateAction<any[]>>;
+  planList: Workout[];
+  setPlanList: Dispatch<SetStateAction<Workout[]>>;
+  savedList: Workout[];
+  setSavedList: Dispatch<SetStateAction<Workout[]>>;
   deletePlan: (id: number) => void;
   deleteSaved: (id: number) => void;
 }
 
-export const WorkoutContext = createContext<WorkoutContextType | null>(null);
+export const WorkoutContext = createContext<WorkoutContextType>({
+  plan: 0,
+  setPlan: () => {},
+  saved: 0,
+  setSaved: () => {},
+  planList: [],
+  setPlanList: () => {},
+  savedList: [],
+  setSavedList: () => {},
+  deletePlan: () => {},
+  deleteSaved: () => {},
+});
 
 
 const Workoutprovider = ({ children }: { children: ReactNode }) => {
   const [plan, setPlan] = useState<number>(0);
   const [saved, setSaved] = useState<number>(0);
 
-  const [planList, setPlanList] = useState<any[]>([]);
-  const [savedList, setSavedList] = useState<any[]>([]);
+  const [planList, setPlanList] = useState<Workout[]>([]);
+  const [savedList, setSavedList] = useState<Workout[]>([]);
 
 
   const deletePlan = (id: number) => {

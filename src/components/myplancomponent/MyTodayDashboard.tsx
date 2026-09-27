@@ -10,9 +10,10 @@ import { CiStar } from 'react-icons/ci';
 import Link from 'next/link';
 import { FaCheck } from 'react-icons/fa';
 import { toast } from 'react-toastify';
+import { Workout } from '@/types/workout.types';
 
 const MyTodayDashboard = ({ sortBy }: { sortBy: string }) => {
-    const { planList, deletePlan } = useContext(WorkoutContext) as any;
+    const { planList, deletePlan } = useContext(WorkoutContext);
 
     const [mark, setMark] = useState<number[]>([]);
     const [disabledButtons, setDisabledButtons] = useState<number[]>([]);
@@ -38,13 +39,13 @@ const MyTodayDashboard = ({ sortBy }: { sortBy: string }) => {
 
         const currentSort = sortBy?.toLowerCase();
 
-        return [...planList].sort((a: any, b: any) => {
+        return [...planList].sort((a: Workout, b: Workout) => {
             if (currentSort === 'duration') {
                 return (Number(b.duration) || 0) - (Number(a.duration) || 0);
             }
             if (currentSort === 'calories' || currentSort === 'caloriesburned') {
-                const calA = Number(a.caloriesBurned ?? a.calories) || 0;
-                const calB = Number(b.caloriesBurned ?? b.calories) || 0;
+                const calA = Number(a.caloriesBurned) || 0;
+                const calB = Number(b.caloriesBurned) || 0;
                 return calB - calA;
             }
             if (currentSort === 'rating') {
@@ -60,7 +61,7 @@ const MyTodayDashboard = ({ sortBy }: { sortBy: string }) => {
         <div>
             {/* Details */}
             <div className='text-white space-y-3'>
-                {sortedPlans.map((plan) => {
+                {sortedPlans.map((plan: Workout) => {
                     return (
                         <div
                             className='flex flex-col md:flex-row md:justify-between md:items-center border border-gray-700 bg-gray-900 rounded-2xl p-4 gap-4'

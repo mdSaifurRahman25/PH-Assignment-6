@@ -1,28 +1,15 @@
+import { Workout, WorkoutsCardProps } from "@/types/workout.types";
 import Image from "next/image";
 import Link from "next/link";
 import { CiStar } from "react-icons/ci";
 import { IoMdTime } from "react-icons/io";
 import { IoTimerSharp } from "react-icons/io5";
 
-// Workout Interface
-interface Workout {
-    id: string | number;
-    name: string;
-    image: string;
-    muscleGroups: string[];
-    equipment: string;
-    duration: number;
-    caloriesBurned: number;
-    rating: number;
-}
 
-interface WorkoutsCardProps {
-    workouts: Workout[];
-}
 
 const WorkoutsCard = ({ workouts }: WorkoutsCardProps) => {
     return (
-        /* Mobile-এ ১টি, Tablet-এ ২টি, Desktop-এ ৩টি করে কার্ড আসবে */
+        /* 1 card in moible, 2 card in tablet and 3 card on desktop */
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 py-8">
             {workouts?.map((workout: Workout) => {
                 const {
